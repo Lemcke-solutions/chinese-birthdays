@@ -13,8 +13,10 @@ async def _start(hass: HomeAssistant, name: str = "Anna", birth_date: str = "198
     )
     assert result["type"] is FlowResultType.FORM
     assert result["step_id"] == "user"
+    year, month, day = (int(part) for part in birth_date.split("-"))
     return await hass.config_entries.flow.async_configure(
-        result["flow_id"], {"name": name, "birth_date": birth_date}
+        result["flow_id"],
+        {"name": name, "birth_day": day, "birth_month": str(month), "birth_year": year},
     )
 
 
@@ -73,10 +75,17 @@ async def test_manual_lunar_date(hass: HomeAssistant) -> None:
 
 
 async def test_out_of_range(hass: HomeAssistant) -> None:
-    result = await _start(hass, birth_date="1899-12-31")
+    result = await _start(hass, birth_date="1900-01-30")
     assert result["type"] is FlowResultType.FORM
     assert result["step_id"] == "user"
     assert result["errors"] == {"base": "out_of_range"}
+
+
+async def test_invalid_date(hass: HomeAssistant) -> None:
+    result = await _start(hass, birth_date="1985-02-30")
+    assert result["type"] is FlowResultType.FORM
+    assert result["step_id"] == "user"
+    assert result["errors"] == {"base": "invalid_date"}
 
 
 async def test_duplicate_person(hass: HomeAssistant) -> None:

@@ -15,10 +15,12 @@ from homeassistant.const import CONF_NAME
 from homeassistant.core import callback
 from homeassistant.helpers.selector import (
     BooleanSelector,
-    DateSelector,
     NumberSelector,
     NumberSelectorConfig,
     NumberSelectorMode,
+    SelectSelector,
+    SelectSelectorConfig,
+    SelectSelectorMode,
     TextSelector,
 )
 from homeassistant.util import slugify
@@ -28,6 +30,9 @@ from .const import (
     CALENDAR_TITLE,
     CALENDAR_UNIQUE_ID,
     CONF_BIRTH_DATE,
+    CONF_BIRTH_DAY,
+    CONF_BIRTH_MONTH,
+    CONF_BIRTH_YEAR,
     CONF_ENTRY_TYPE,
     CONF_LUNAR_DAY,
     CONF_LUNAR_LEAP,
@@ -53,6 +58,17 @@ def _number(minimum: int, maximum: int) -> NumberSelector:
     return NumberSelector(
         NumberSelectorConfig(min=minimum, max=maximum, step=1, mode=NumberSelectorMode.BOX)
     )
+
+
+def _birth_date_from_input(user_input: dict[str, Any]) -> date | None:
+    try:
+        return date(
+            int(user_input[CONF_BIRTH_YEAR]),
+            int(user_input[CONF_BIRTH_MONTH]),
+            int(user_input[CONF_BIRTH_DAY]),
+        )
+    except ValueError:
+        return None
 
 
 def _lunar_schema(lunar: LunarBirth) -> vol.Schema:
@@ -124,12 +140,16 @@ class LunarBirthdaysConfigFlow(ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
         if user_input is not None:
             name = user_input[CONF_NAME].strip()
-            birth_date = date.fromisoformat(user_input[CONF_BIRTH_DATE])
-            try:
-                lunar = solar_to_lunar(birth_date)
-            except LunarRangeError:
-                errors["base"] = "out_of_range"
+            birth_date = _birth_date_from_input(user_input)
+            lunar: LunarBirth | None = None
+            if birth_date is None:
+                errors["base"] = "invalid_date"
             else:
+                try:
+                    lunar = solar_to_lunar(birth_date)
+                except LunarRangeError:
+                    errors["base"] = "out_of_range"
+            if birth_date is not None and lunar is not None:
                 await self.async_set_unique_id(f"{slugify(name)}_{birth_date.isoformat()}")
                 self._abort_if_unique_id_configured()
                 self._name = name
@@ -143,7 +163,15 @@ class LunarBirthdaysConfigFlow(ConfigFlow, domain=DOMAIN):
                 vol.Schema(
                     {
                         vol.Required(CONF_NAME): TextSelector(),
-                        vol.Required(CONF_BIRTH_DATE): DateSelector(),
+                        vol.Required(CONF_BIRTH_DAY): _number(1, 31),
+                        vol.Required(CONF_BIRTH_MONTH): SelectSelector(
+                            SelectSelectorConfig(
+                                options=[str(month) for month in range(1, 13)],
+                                mode=SelectSelectorMode.DROPDOWN,
+                                translation_key=CONF_BIRTH_MONTH,
+                            )
+                        ),
+                        vol.Required(CONF_BIRTH_YEAR): _number(1900, 2100),
                     }
                 ),
                 user_input,

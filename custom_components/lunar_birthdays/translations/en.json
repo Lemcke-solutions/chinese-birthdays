@@ -6,7 +6,9 @@
         "description": "Enter the name and Gregorian date of birth. Supported range: 31 January 1900 to 2099.",
         "data": {
           "name": "Name",
-          "birth_date": "Date of birth"
+          "birth_day": "Day",
+          "birth_month": "Month",
+          "birth_year": "Year"
         }
       },
       "confirm": {
@@ -28,6 +30,7 @@
       }
     },
     "error": {
+      "invalid_date": "This date does not exist.",
       "out_of_range": "This date is outside the supported range (31 January 1900 to 2099).",
       "invalid_lunar_date": "Invalid lunar date: year 1900-2099, month 1-12, day 1-30."
     },
@@ -125,6 +128,24 @@
     "calendar": {
       "lunar_birthdays": {
         "name": "Lunar birthdays"
+      }
+    }
+  },
+  "selector": {
+    "birth_month": {
+      "options": {
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
       }
     }
   }

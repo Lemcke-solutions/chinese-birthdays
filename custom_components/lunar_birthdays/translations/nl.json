@@ -6,7 +6,9 @@
         "description": "Vul de naam en de Gregoriaanse geboortedatum in. Ondersteund bereik: 31 januari 1900 tot en met 2099.",
         "data": {
           "name": "Naam",
-          "birth_date": "Geboortedatum"
+          "birth_day": "Dag",
+          "birth_month": "Maand",
+          "birth_year": "Jaar"
         }
       },
       "confirm": {
@@ -28,6 +30,7 @@
       }
     },
     "error": {
+      "invalid_date": "Deze datum bestaat niet.",
       "out_of_range": "Deze datum valt buiten het ondersteunde bereik (31 januari 1900 tot en met 2099).",
       "invalid_lunar_date": "Ongeldige maandatum: jaar 1900-2099, maand 1-12, dag 1-30."
     },
@@ -125,6 +128,24 @@
     "calendar": {
       "lunar_birthdays": {
         "name": "Maanverjaardagen"
+      }
+    }
+  },
+  "selector": {
+    "birth_month": {
+      "options": {
+        "1": "januari",
+        "2": "februari",
+        "3": "maart",
+        "4": "april",
+        "5": "mei",
+        "6": "juni",
+        "7": "juli",
+        "8": "augustus",
+        "9": "september",
+        "10": "oktober",
+        "11": "november",
+        "12": "december"
       }
     }
   }
