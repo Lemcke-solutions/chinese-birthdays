@@ -1,0 +1,12 @@
+{
+  "domain": "lunar_birthdays",
+  "name": "Lunar Birthdays",
+  "codeowners": ["@Lemcke-solutions"],
+  "config_flow": true,
+  "documentation": "https://github.com/Lemcke-solutions/chinese-bithdays",
+  "integration_type": "service",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/Lemcke-solutions/chinese-bithdays/issues",
+  "requirements": ["lunardate==0.2.2"],
+  "version": "0.1.0"
+}

@@ -1,0 +1,12 @@
+{
+  "entity": {
+    "sensor": {
+      "next_birthday": {"default": "mdi:cake-variant"},
+      "days_until": {"default": "mdi:calendar-clock"},
+      "zodiac": {"default": "mdi:moon-waning-crescent"}
+    },
+    "calendar": {
+      "lunar_birthdays": {"default": "mdi:calendar-heart"}
+    }
+  }
+}

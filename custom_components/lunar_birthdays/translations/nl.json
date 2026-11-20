@@ -1,0 +1,131 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Maanverjaardag toevoegen",
+        "description": "Vul de naam en de Gregoriaanse geboortedatum in. Ondersteund bereik: 31 januari 1900 tot en met 2099.",
+        "data": {
+          "name": "Naam",
+          "birth_date": "Geboortedatum"
+        }
+      },
+      "confirm": {
+        "title": "Maandatum controleren",
+        "description": "{name} is geboren op {birth_date}. Dat is maanjaar {lunar_year}, maand {lunar_month}, dag {lunar_day} (schrikkelmaand: {leap}, sterrenbeeld {animal}).\n\nKlopt deze maandatum? Zo niet, dan kun je hem in de volgende stap zelf invullen.",
+        "data": {
+          "correct": "Deze maandatum klopt"
+        }
+      },
+      "manual": {
+        "title": "Maandatum invullen",
+        "description": "Vul de maandatum van de geboorte van {name} in. Het maanjaar bepaalt het sterrenbeeld.",
+        "data": {
+          "lunar_year": "Maanjaar",
+          "lunar_month": "Maanmaand",
+          "lunar_day": "Maandag",
+          "lunar_leap": "Schrikkelmaand"
+        }
+      }
+    },
+    "error": {
+      "out_of_range": "Deze datum valt buiten het ondersteunde bereik (31 januari 1900 tot en met 2099).",
+      "invalid_lunar_date": "Ongeldige maandatum: jaar 1900-2099, maand 1-12, dag 1-30."
+    },
+    "abort": {
+      "already_configured": "Deze persoon is al toegevoegd."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Maandatum corrigeren",
+        "description": "Corrigeer de maandatum van de geboorte van {name}. Het maanjaar bepaalt het sterrenbeeld.",
+        "data": {
+          "lunar_year": "Maanjaar",
+          "lunar_month": "Maanmaand",
+          "lunar_day": "Maandag",
+          "lunar_leap": "Schrikkelmaand"
+        }
+      }
+    },
+    "error": {
+      "invalid_lunar_date": "Ongeldige maandatum: jaar 1900-2099, maand 1-12, dag 1-30."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "next_birthday": {
+        "name": "Volgende maanverjaardag",
+        "state_attributes": {
+          "lunar_date": {
+            "name": "Maandatum"
+          },
+          "lunar_month": {
+            "name": "Maanmaand"
+          },
+          "lunar_day": {
+            "name": "Maandag"
+          },
+          "lunar_leap_month": {
+            "name": "Schrikkelmaand"
+          },
+          "age": {
+            "name": "Leeftijd"
+          },
+          "birth_date": {
+            "name": "Geboortedatum"
+          },
+          "birth_year": {
+            "name": "Geboortejaar"
+          },
+          "lunar_birth_year": {
+            "name": "Geboortemaanjaar"
+          }
+        }
+      },
+      "days_until": {
+        "name": "Dagen tot maanverjaardag"
+      },
+      "zodiac": {
+        "name": "Chinees sterrenbeeld",
+        "state": {
+          "rat": "Rat",
+          "ox": "Os",
+          "tiger": "Tijger",
+          "rabbit": "Konijn",
+          "dragon": "Draak",
+          "snake": "Slang",
+          "horse": "Paard",
+          "goat": "Geit",
+          "monkey": "Aap",
+          "rooster": "Haan",
+          "dog": "Hond",
+          "pig": "Varken"
+        },
+        "state_attributes": {
+          "character": {
+            "name": "Karakter"
+          },
+          "element": {
+            "name": "Element",
+            "state": {
+              "wood": "Hout",
+              "fire": "Vuur",
+              "earth": "Aarde",
+              "metal": "Metaal",
+              "water": "Water"
+            }
+          },
+          "lunar_year": {
+            "name": "Maanjaar"
+          }
+        }
+      }
+    },
+    "calendar": {
+      "lunar_birthdays": {
+        "name": "Maanverjaardagen"
+      }
+    }
+  }
+}

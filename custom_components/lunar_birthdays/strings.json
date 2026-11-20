@@ -1,0 +1,131 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add lunar birthday",
+        "description": "Enter the name and Gregorian date of birth. Supported range: 31 January 1900 to 2099.",
+        "data": {
+          "name": "Name",
+          "birth_date": "Date of birth"
+        }
+      },
+      "confirm": {
+        "title": "Check lunar date",
+        "description": "{name} was born on {birth_date}. That is lunar year {lunar_year}, month {lunar_month}, day {lunar_day} (leap month: {leap}, zodiac {animal}).\n\nIs this lunar date correct? If not, you can enter it yourself in the next step.",
+        "data": {
+          "correct": "This lunar date is correct"
+        }
+      },
+      "manual": {
+        "title": "Enter lunar date",
+        "description": "Enter the lunar date of birth of {name}. The lunar year determines the zodiac animal.",
+        "data": {
+          "lunar_year": "Lunar year",
+          "lunar_month": "Lunar month",
+          "lunar_day": "Lunar day",
+          "lunar_leap": "Leap month"
+        }
+      }
+    },
+    "error": {
+      "out_of_range": "This date is outside the supported range (31 January 1900 to 2099).",
+      "invalid_lunar_date": "Invalid lunar date: year 1900-2099, month 1-12, day 1-30."
+    },
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Correct lunar date",
+        "description": "Correct the lunar date of birth of {name}. The lunar year determines the zodiac animal.",
+        "data": {
+          "lunar_year": "Lunar year",
+          "lunar_month": "Lunar month",
+          "lunar_day": "Lunar day",
+          "lunar_leap": "Leap month"
+        }
+      }
+    },
+    "error": {
+      "invalid_lunar_date": "Invalid lunar date: year 1900-2099, month 1-12, day 1-30."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "next_birthday": {
+        "name": "Next lunar birthday",
+        "state_attributes": {
+          "lunar_date": {
+            "name": "Lunar date"
+          },
+          "lunar_month": {
+            "name": "Lunar month"
+          },
+          "lunar_day": {
+            "name": "Lunar day"
+          },
+          "lunar_leap_month": {
+            "name": "Leap month"
+          },
+          "age": {
+            "name": "Age"
+          },
+          "birth_date": {
+            "name": "Date of birth"
+          },
+          "birth_year": {
+            "name": "Birth year"
+          },
+          "lunar_birth_year": {
+            "name": "Lunar birth year"
+          }
+        }
+      },
+      "days_until": {
+        "name": "Days until lunar birthday"
+      },
+      "zodiac": {
+        "name": "Chinese zodiac",
+        "state": {
+          "rat": "Rat",
+          "ox": "Ox",
+          "tiger": "Tiger",
+          "rabbit": "Rabbit",
+          "dragon": "Dragon",
+          "snake": "Snake",
+          "horse": "Horse",
+          "goat": "Goat",
+          "monkey": "Monkey",
+          "rooster": "Rooster",
+          "dog": "Dog",
+          "pig": "Pig"
+        },
+        "state_attributes": {
+          "character": {
+            "name": "Character"
+          },
+          "element": {
+            "name": "Element",
+            "state": {
+              "wood": "Wood",
+              "fire": "Fire",
+              "earth": "Earth",
+              "metal": "Metal",
+              "water": "Water"
+            }
+          },
+          "lunar_year": {
+            "name": "Lunar year"
+          }
+        }
+      }
+    },
+    "calendar": {
+      "lunar_birthdays": {
+        "name": "Lunar birthdays"
+      }
+    }
+  }
+}
