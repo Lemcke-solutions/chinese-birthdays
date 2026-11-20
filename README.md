@@ -15,7 +15,7 @@ A Home Assistant custom integration for Chinese lunar birthdays. A lunar birthda
 
 ### HACS
 
-1. HACS → ⋮ → **Custom repositories** → add `https://github.com/Lemcke-solutions/chinese-bithdays` as type **Integration**.
+1. HACS → ⋮ → **Custom repositories** → add `https://github.com/Lemcke-solutions/chinese-birthdays` as type **Integration**.
 2. Install **Lunar Birthdays** and restart Home Assistant.
 
 ### Manual
