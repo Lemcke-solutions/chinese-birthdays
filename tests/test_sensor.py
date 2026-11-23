@@ -30,6 +30,10 @@ async def test_sensors(hass: HomeAssistant, freezer: FrozenDateTimeFactory) -> N
 
     assert hass.states.get("sensor.anna_days_until_lunar_birthday").state == "48"
 
+    age = hass.states.get("sensor.anna_age_at_next_lunar_birthday")
+    assert age.state == "42"
+    assert age.attributes["unit_of_measurement"] == "y"
+
     zodiac = hass.states.get("sensor.anna_chinese_zodiac")
     assert zodiac.state == "rat"
     assert zodiac.attributes["character"] == "鼠"
@@ -40,7 +44,7 @@ async def test_sensors(hass: HomeAssistant, freezer: FrozenDateTimeFactory) -> N
     assert device is not None
     assert device.name == "Anna"
     registry = er.async_get(hass)
-    assert len(er.async_entries_for_config_entry(registry, entry.entry_id)) == 3
+    assert len(er.async_entries_for_config_entry(registry, entry.entry_id)) == 4
     assert all(e.device_id == device.id for e in er.async_entries_for_config_entry(registry, entry.entry_id))
 
 
@@ -64,6 +68,7 @@ async def test_midnight_rollover(hass: HomeAssistant, freezer: FrozenDateTimeFac
     state = hass.states.get("sensor.anna_next_lunar_birthday")
     assert state.state == "2027-12-27"
     assert state.attributes["age"] == 43
+    assert hass.states.get("sensor.anna_age_at_next_lunar_birthday").state == "43"
 
 
 async def test_unload(hass: HomeAssistant) -> None:

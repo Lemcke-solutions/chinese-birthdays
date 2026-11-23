@@ -89,6 +89,9 @@
       "days_until": {
         "name": "Days until lunar birthday"
       },
+      "next_age": {
+        "name": "Age at next lunar birthday"
+      },
       "zodiac": {
         "name": "Chinese zodiac",
         "state": {

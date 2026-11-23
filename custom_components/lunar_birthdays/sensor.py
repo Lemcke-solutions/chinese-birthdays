@@ -46,6 +46,7 @@ async def async_setup_entry(
     sensors: list[LunarBirthdaySensorBase] = [
         NextBirthdaySensor(entry, person, device_info),
         DaysUntilSensor(entry, person, device_info),
+        NextAgeSensor(entry, person, device_info),
         ZodiacSensor(entry, person, device_info),
     ]
     async_add_entities(sensors)
@@ -116,6 +117,17 @@ class DaysUntilSensor(LunarBirthdaySensorBase):
         if (day := self._next_birthday()) is None:
             return None
         return (day - dt_util.now().date()).days
+
+
+class NextAgeSensor(LunarBirthdaySensorBase):
+    _attr_translation_key = "next_age"
+    _attr_native_unit_of_measurement = UnitOfTime.YEARS
+
+    @property
+    def native_value(self) -> int | None:
+        if (day := self._next_birthday()) is None:
+            return None
+        return age_on(self._person.lunar_birth, day)
 
 
 class ZodiacSensor(LunarBirthdaySensorBase):

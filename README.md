@@ -6,7 +6,7 @@ A Home Assistant custom integration for Chinese lunar birthdays. A lunar birthda
 
 - One entry per person, added via the UI.
 - The lunar date of birth is calculated from the Gregorian date of birth; you confirm it or correct it (including the lunar year).
-- Per person a device with three sensors: next lunar birthday, days until it, and the Chinese zodiac animal.
+- Per person a device with four sensors: next lunar birthday, days until it, age at that birthday, and the Chinese zodiac animal.
 - One shared calendar **Lunar birthdays** (`calendar.maanverjaardagen` in Dutch, `calendar.lunar_birthdays` in English) with all persons as all-day events.
 - Recalculates daily just after midnight; no polling.
 - English and Dutch translations.
@@ -43,6 +43,7 @@ Entity IDs below are for an English Home Assistant and a person named Anna.
 |---|---|
 | `sensor.anna_next_lunar_birthday` | Gregorian date of the next lunar birthday (device class `date`) |
 | `sensor.anna_days_until_lunar_birthday` | Days until that date (`0` on the birthday itself) |
+| `sensor.anna_age_at_next_lunar_birthday` | Age that will be celebrated on the next lunar birthday |
 | `sensor.anna_chinese_zodiac` | Zodiac animal: `rat`, `ox`, `tiger`, `rabbit`, `dragon`, `snake`, `horse`, `goat`, `monkey`, `rooster`, `dog`, `pig` (translated in the UI) |
 | `calendar.lunar_birthdays` | All birthdays as all-day events, summary `Anna (42)` |
 

@@ -89,6 +89,9 @@
       "days_until": {
         "name": "Dagen tot maanverjaardag"
       },
+      "next_age": {
+        "name": "Leeftijd bij volgende maanverjaardag"
+      },
       "zodiac": {
         "name": "Chinees sterrenbeeld",
         "state": {

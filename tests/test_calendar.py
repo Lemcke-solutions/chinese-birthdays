@@ -72,3 +72,4 @@ async def test_dutch_entity_ids(hass: HomeAssistant) -> None:
     assert hass.states.get("calendar.maanverjaardagen") is not None
     assert hass.states.get("sensor.anna_volgende_maanverjaardag") is not None
     assert hass.states.get("sensor.anna_chinees_sterrenbeeld").state == "rat"
+    assert hass.states.get("sensor.anna_leeftijd_bij_volgende_maanverjaardag") is not None

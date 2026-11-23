@@ -1,12 +1,23 @@
 {
   "entity": {
     "sensor": {
-      "next_birthday": {"default": "mdi:cake-variant"},
-      "days_until": {"default": "mdi:calendar-clock"},
-      "zodiac": {"default": "mdi:moon-waning-crescent"}
+      "next_birthday": {
+        "default": "mdi:cake-variant"
+      },
+      "days_until": {
+        "default": "mdi:calendar-clock"
+      },
+      "next_age": {
+        "default": "mdi:cake-variant-outline"
+      },
+      "zodiac": {
+        "default": "mdi:moon-waning-crescent"
+      }
     },
     "calendar": {
-      "lunar_birthdays": {"default": "mdi:calendar-heart"}
+      "lunar_birthdays": {
+        "default": "mdi:calendar-heart"
+      }
     }
   }
 }
