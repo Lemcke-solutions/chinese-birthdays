@@ -5,7 +5,7 @@ A Home Assistant custom integration for Chinese lunar birthdays. A lunar birthda
 ## Features
 
 - One entry per person, added via the UI.
-- The lunar date of birth is calculated from the Gregorian date of birth; you confirm it or correct it (including the lunar year).
+- Enter the date of birth as a Gregorian date or directly as a lunar date. From a Gregorian date the lunar date is calculated, which you confirm or correct (including the lunar year).
 - Per person a device (**Maanverjaardag Anna** / **Lunar birthday Anna**) with four sensors: next lunar birthday, days until it, age at that birthday, and the Chinese zodiac animal.
 - One shared calendar **Maanverjaardagen** / **Lunar birthdays** (`calendar.lunar_birthdays`) with all persons as all-day events.
 - All entity IDs start with `lunar_birthdays_`, regardless of the Home Assistant language, so they are easy to recognise.
@@ -27,12 +27,13 @@ Copy the `custom_components/lunar_birthdays` directory to your HA `config/custom
 
 **Settings → Devices & services → Add integration → Lunar Birthdays**
 
-1. Enter the name and Gregorian date of birth.
-2. The calculated lunar date (lunar year, month, day, leap month) is shown. Confirm it, or uncheck the box to enter the lunar year, month (1–12), day (1–30) and leap month yourself.
+1. Enter the name, optionally the gender (male, female, other), and choose whether you enter the date of birth as a **Gregorian date** or a **lunar date**.
+2. **Gregorian date**: enter day, month and year. The calculated lunar date (lunar year, month, day, leap month) is shown. Confirm it, or uncheck the box to enter the lunar date yourself.
+3. **Lunar date**: enter lunar year, month (1–12), day (1–30) and whether it is a leap month. The Gregorian date of birth is calculated from it. A lunar date that does not exist (a leap month that year does not have, or day 30 in a 29-day month) is rejected.
 
 Repeat for every person. The shared calendar entry **Maanverjaardagen** is created automatically with the first person.
 
-The lunar date can be corrected afterwards via **Configure** on the person's entry. The lunar year is editable too, since it determines the zodiac animal.
+The lunar date and gender can be changed afterwards via **Configure** on the person's entry. The lunar year is editable too, since it determines the zodiac animal.
 
 Supported range: dates of birth from 31 January 1900 up to 2099 (the range of the [lunardate](https://pypi.org/project/lunardate/) library).
 
@@ -60,6 +61,7 @@ Entity IDs below are for a person named Anna. They are the same in every languag
 | `age` | Age that is celebrated on the next birthday |
 | `birth_date`, `birth_year` | Gregorian date and year of birth |
 | `lunar_birth_year` | Lunar year of birth |
+| `gender` | `male`, `female` or `other` (only when set) |
 
 **Chinese zodiac**
 

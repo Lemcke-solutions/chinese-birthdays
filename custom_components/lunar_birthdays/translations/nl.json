@@ -3,12 +3,30 @@
     "step": {
       "user": {
         "title": "Maanverjaardag toevoegen",
-        "description": "Vul de naam en de Gregoriaanse geboortedatum in. Ondersteund bereik: 31 januari 1900 tot en met 2099.",
+        "description": "Vul de naam in en kies hoe je de geboortedatum wilt invoeren.",
         "data": {
           "name": "Naam",
+          "gender": "Geslacht (optioneel)",
+          "calendar_type": "Geboortedatum invoeren als"
+        }
+      },
+      "gregorian": {
+        "title": "Geboortedatum",
+        "description": "Vul de Gregoriaanse geboortedatum van {name} in. Ondersteund bereik: 31 januari 1900 tot en met 2099.",
+        "data": {
           "birth_day": "Dag",
           "birth_month": "Maand",
           "birth_year": "Jaar"
+        }
+      },
+      "lunar": {
+        "title": "Maandatum van geboorte",
+        "description": "Vul de maandatum van de geboorte van {name} in. De Gregoriaanse geboortedatum wordt daaruit berekend. Vink schrikkelmaand alleen aan als {name} in een schrikkelmaand is geboren.",
+        "data": {
+          "lunar_year": "Maanjaar",
+          "lunar_month": "Maanmaand",
+          "lunar_day": "Maandag",
+          "lunar_leap": "Schrikkelmaand"
         }
       },
       "confirm": {
@@ -32,7 +50,8 @@
     "error": {
       "invalid_date": "Deze datum bestaat niet.",
       "out_of_range": "Deze datum valt buiten het ondersteunde bereik (31 januari 1900 tot en met 2099).",
-      "invalid_lunar_date": "Ongeldige maandatum: jaar 1900-2099, maand 1-12, dag 1-30."
+      "invalid_lunar_date": "Ongeldige maandatum: jaar 1900-2099, maand 1-12, dag 1-30.",
+      "lunar_date_not_found": "Deze maandatum bestaat niet: dat jaar heeft zo'n schrikkelmaand niet, of de maand heeft maar 29 dagen."
     },
     "abort": {
       "already_configured": "Deze persoon is al toegevoegd."
@@ -47,7 +66,8 @@
           "lunar_year": "Maanjaar",
           "lunar_month": "Maanmaand",
           "lunar_day": "Maandag",
-          "lunar_leap": "Schrikkelmaand"
+          "lunar_leap": "Schrikkelmaand",
+          "gender": "Geslacht (optioneel)"
         }
       }
     },
@@ -83,6 +103,14 @@
           },
           "lunar_birth_year": {
             "name": "Geboortemaanjaar"
+          },
+          "gender": {
+            "name": "Geslacht",
+            "state": {
+              "male": "Man",
+              "female": "Vrouw",
+              "other": "Anders"
+            }
           }
         }
       },
@@ -149,6 +177,19 @@
         "10": "oktober",
         "11": "november",
         "12": "december"
+      }
+    },
+    "calendar_type": {
+      "options": {
+        "gregorian": "Gregoriaanse datum (westerse kalender)",
+        "lunar": "Maandatum (Chinese kalender)"
+      }
+    },
+    "gender": {
+      "options": {
+        "male": "Man",
+        "female": "Vrouw",
+        "other": "Anders"
       }
     }
   },

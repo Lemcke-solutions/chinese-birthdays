@@ -8,6 +8,7 @@ from custom_components.lunar_birthdays.lunar_calc import (
     age_on,
     birthdays_between,
     element,
+    lunar_birth_to_solar,
     lunar_to_solar,
     next_birthday,
     solar_to_lunar,
@@ -151,3 +152,18 @@ def test_birthdays_between_not_before_birth():
     birth = LunarBirth(2026, 1, 1)
     assert birthdays_between(birth, date(2025, 1, 1), date(2028, 1, 1)) == [(date(2027, 2, 6), 1)]
     assert next_birthday(birth, date(2026, 2, 17)) == date(2027, 2, 6)
+
+
+def test_lunar_birth_to_solar():
+    assert lunar_birth_to_solar(LunarBirth(1984, 11, 30)) == date(1985, 1, 20)
+    assert lunar_birth_to_solar(LunarBirth(2023, 2, 11, is_leap=True)) == date(2023, 4, 1)
+    assert lunar_birth_to_solar(LunarBirth(2023, 2, 11)) == date(2023, 3, 2)
+
+
+def test_lunar_birth_to_solar_no_fallback():
+    with pytest.raises(ValueError):
+        lunar_birth_to_solar(LunarBirth(2024, 2, 1, is_leap=True))
+    with pytest.raises(ValueError):
+        lunar_birth_to_solar(LunarBirth(2026, 2, 30))
+    with pytest.raises(LunarRangeError):
+        lunar_birth_to_solar(LunarBirth(1899, 1, 1))

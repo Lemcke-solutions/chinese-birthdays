@@ -80,6 +80,17 @@ def lunar_to_solar(year: int, month: int, day: int) -> date:
         return LunarDate(year, month, 29).toSolarDate()
 
 
+def lunar_birth_to_solar(birth: LunarBirth) -> date:
+    """Gregorian date of birth for an exact lunar date, including leap month.
+
+    Unlike lunar_to_solar there is no fallback: a leap month or day 30 that
+    does not exist in that year raises ValueError.
+    """
+    if not MIN_LUNAR_YEAR <= birth.year <= MAX_LUNAR_YEAR:
+        raise LunarRangeError(f"Lunar year {birth.year} is outside the supported range")
+    return LunarDate(birth.year, birth.month, birth.day, birth.is_leap).toSolarDate()
+
+
 def birthday_in_lunar_year(birth: LunarBirth, lunar_year: int) -> date:
     """Gregorian date on which the birthday is celebrated in a lunar year.
 

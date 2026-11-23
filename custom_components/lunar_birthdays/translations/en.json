@@ -3,12 +3,30 @@
     "step": {
       "user": {
         "title": "Add lunar birthday",
-        "description": "Enter the name and Gregorian date of birth. Supported range: 31 January 1900 to 2099.",
+        "description": "Enter the name and choose how you want to enter the date of birth.",
         "data": {
           "name": "Name",
+          "gender": "Gender (optional)",
+          "calendar_type": "Enter date of birth as"
+        }
+      },
+      "gregorian": {
+        "title": "Date of birth",
+        "description": "Enter the Gregorian date of birth of {name}. Supported range: 31 January 1900 to 2099.",
+        "data": {
           "birth_day": "Day",
           "birth_month": "Month",
           "birth_year": "Year"
+        }
+      },
+      "lunar": {
+        "title": "Lunar date of birth",
+        "description": "Enter the lunar date of birth of {name}. The Gregorian date of birth is calculated from it. Only check leap month if {name} was born in a leap month.",
+        "data": {
+          "lunar_year": "Lunar year",
+          "lunar_month": "Lunar month",
+          "lunar_day": "Lunar day",
+          "lunar_leap": "Leap month"
         }
       },
       "confirm": {
@@ -32,7 +50,8 @@
     "error": {
       "invalid_date": "This date does not exist.",
       "out_of_range": "This date is outside the supported range (31 January 1900 to 2099).",
-      "invalid_lunar_date": "Invalid lunar date: year 1900-2099, month 1-12, day 1-30."
+      "invalid_lunar_date": "Invalid lunar date: year 1900-2099, month 1-12, day 1-30.",
+      "lunar_date_not_found": "This lunar date does not exist: that year has no such leap month, or the month has only 29 days."
     },
     "abort": {
       "already_configured": "This person has already been added."
@@ -47,7 +66,8 @@
           "lunar_year": "Lunar year",
           "lunar_month": "Lunar month",
           "lunar_day": "Lunar day",
-          "lunar_leap": "Leap month"
+          "lunar_leap": "Leap month",
+          "gender": "Gender (optional)"
         }
       }
     },
@@ -83,6 +103,14 @@
           },
           "lunar_birth_year": {
             "name": "Lunar birth year"
+          },
+          "gender": {
+            "name": "Gender",
+            "state": {
+              "male": "Male",
+              "female": "Female",
+              "other": "Other"
+            }
           }
         }
       },
@@ -149,6 +177,19 @@
         "10": "October",
         "11": "November",
         "12": "December"
+      }
+    },
+    "calendar_type": {
+      "options": {
+        "gregorian": "Gregorian date (Western calendar)",
+        "lunar": "Lunar date (Chinese calendar)"
+      }
+    },
+    "gender": {
+      "options": {
+        "male": "Male",
+        "female": "Female",
+        "other": "Other"
       }
     }
   },

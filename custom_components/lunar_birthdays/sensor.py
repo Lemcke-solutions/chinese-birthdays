@@ -108,6 +108,8 @@ class NextBirthdaySensor(LunarBirthdaySensorBase):
         }
         if (day := self._next_birthday()) is not None:
             attrs["age"] = age_on(lunar, day)
+        if self._person.gender:
+            attrs["gender"] = self._person.gender
         return attrs
 
 

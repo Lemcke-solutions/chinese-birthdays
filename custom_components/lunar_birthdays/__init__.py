@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import logging
+from collections.abc import Mapping
 from dataclasses import dataclass
 from datetime import date
+from typing import Any
 
 from homeassistant.config_entries import SOURCE_IMPORT, ConfigEntry
 from homeassistant.const import CONF_NAME, Platform
@@ -15,6 +17,7 @@ from .const import (
     CALENDAR_UNIQUE_ID,
     CONF_BIRTH_DATE,
     CONF_ENTRY_TYPE,
+    CONF_GENDER,
     CONF_LUNAR_DAY,
     CONF_LUNAR_LEAP,
     CONF_LUNAR_MONTH,
@@ -45,21 +48,31 @@ class PersonData:
     name: str
     birth_date: date
     lunar_birth: LunarBirth
+    gender: str | None = None
 
 
 def is_calendar_entry(entry: ConfigEntry) -> bool:
     return entry.data.get(CONF_ENTRY_TYPE) == ENTRY_TYPE_CALENDAR
 
 
+def _person_source(entry: ConfigEntry) -> Mapping[str, Any]:
+    """Options once the options flow has been saved, otherwise the original data."""
+    return entry.options if CONF_LUNAR_YEAR in entry.options else entry.data
+
+
 def get_lunar_birth(entry: ConfigEntry) -> LunarBirth:
     """Lunar birth date of a person entry; corrections in options take precedence."""
-    source = entry.options if CONF_LUNAR_YEAR in entry.options else entry.data
+    source = _person_source(entry)
     return LunarBirth(
         year=int(source[CONF_LUNAR_YEAR]),
         month=int(source[CONF_LUNAR_MONTH]),
         day=int(source[CONF_LUNAR_DAY]),
         is_leap=bool(source.get(CONF_LUNAR_LEAP, False)),
     )
+
+
+def get_gender(entry: ConfigEntry) -> str | None:
+    return _person_source(entry).get(CONF_GENDER)
 
 
 def sensor_entity_id(name: str, key: str) -> str:
@@ -80,6 +93,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         name=entry.data[CONF_NAME],
         birth_date=date.fromisoformat(entry.data[CONF_BIRTH_DATE]),
         lunar_birth=get_lunar_birth(entry),
+        gender=get_gender(entry),
     )
     entry.runtime_data = person
     get_persons(hass)[entry.entry_id] = person
