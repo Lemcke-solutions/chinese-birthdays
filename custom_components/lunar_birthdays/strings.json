@@ -58,7 +58,7 @@
   "entity": {
     "sensor": {
       "next_birthday": {
-        "name": "Next lunar birthday",
+        "name": "Next birthday",
         "state_attributes": {
           "lunar_date": {
             "name": "Lunar date"
@@ -87,13 +87,13 @@
         }
       },
       "days_until": {
-        "name": "Days until lunar birthday"
+        "name": "Days until birthday"
       },
       "next_age": {
-        "name": "Age at next lunar birthday"
+        "name": "Age"
       },
       "zodiac": {
-        "name": "Chinese zodiac",
+        "name": "Zodiac",
         "state": {
           "rat": "Rat",
           "ox": "Ox",
@@ -150,6 +150,11 @@
         "11": "November",
         "12": "December"
       }
+    }
+  },
+  "device": {
+    "person": {
+      "name": "Lunar birthday {name}"
     }
   }
 }

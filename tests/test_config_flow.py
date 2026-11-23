@@ -106,7 +106,7 @@ async def test_only_one_calendar(hass: HomeAssistant) -> None:
 
 async def test_options_flow_changes_zodiac(hass: HomeAssistant) -> None:
     entry = await add_person(hass)
-    assert hass.states.get("sensor.anna_chinese_zodiac").state == "rat"
+    assert hass.states.get("sensor.lunar_birthdays_anna_zodiac").state == "rat"
 
     result = await hass.config_entries.options.async_init(entry.entry_id)
     assert result["type"] is FlowResultType.FORM
@@ -122,10 +122,10 @@ async def test_options_flow_changes_zodiac(hass: HomeAssistant) -> None:
     # Original calculated value is kept in data.
     assert entry.data["lunar_year"] == 1984
 
-    state = hass.states.get("sensor.anna_chinese_zodiac")
+    state = hass.states.get("sensor.lunar_birthdays_anna_zodiac")
     assert state.state == "ox"
     assert state.attributes["character"] == "牛"
-    assert hass.states.get("sensor.anna_next_lunar_birthday").attributes["lunar_date"] == "1-1"
+    assert hass.states.get("sensor.lunar_birthdays_anna_next_birthday").attributes["lunar_date"] == "1-1"
 
 
 async def test_no_options_for_calendar(hass: HomeAssistant) -> None:

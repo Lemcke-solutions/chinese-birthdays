@@ -112,6 +112,7 @@ def _lunar_data(lunar: LunarBirth) -> dict[str, Any]:
 
 class LunarBirthdaysConfigFlow(ConfigFlow, domain=DOMAIN):
     VERSION = 1
+    MINOR_VERSION = 2
 
     def __init__(self) -> None:
         self._name: str = ""

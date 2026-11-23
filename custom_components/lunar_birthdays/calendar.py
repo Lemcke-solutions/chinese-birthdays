@@ -10,7 +10,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.event import async_track_time_change
 from homeassistant.util import dt as dt_util
 
-from . import PersonData, get_persons
+from . import CALENDAR_ENTITY_ID, PersonData, get_persons
 from .const import SIGNAL_UPDATED
 from .lunar_calc import (
     LunarRangeError,
@@ -51,6 +51,7 @@ class LunarBirthdayCalendar(CalendarEntity):
 
     def __init__(self, entry: ConfigEntry) -> None:
         self._attr_unique_id = f"{entry.entry_id}_calendar"
+        self.entity_id = CALENDAR_ENTITY_ID
 
     async def async_added_to_hass(self) -> None:
         self.async_on_remove(

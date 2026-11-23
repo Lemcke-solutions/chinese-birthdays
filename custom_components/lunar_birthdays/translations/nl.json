@@ -58,7 +58,7 @@
   "entity": {
     "sensor": {
       "next_birthday": {
-        "name": "Volgende maanverjaardag",
+        "name": "Volgende verjaardag",
         "state_attributes": {
           "lunar_date": {
             "name": "Maandatum"
@@ -87,13 +87,13 @@
         }
       },
       "days_until": {
-        "name": "Dagen tot maanverjaardag"
+        "name": "Dagen tot verjaardag"
       },
       "next_age": {
-        "name": "Leeftijd bij volgende maanverjaardag"
+        "name": "Leeftijd"
       },
       "zodiac": {
-        "name": "Chinees sterrenbeeld",
+        "name": "Sterrenbeeld",
         "state": {
           "rat": "Rat",
           "ox": "Os",
@@ -150,6 +150,11 @@
         "11": "november",
         "12": "december"
       }
+    }
+  },
+  "device": {
+    "person": {
+      "name": "Maanverjaardag {name}"
     }
   }
 }

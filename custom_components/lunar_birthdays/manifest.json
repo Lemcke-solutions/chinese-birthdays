@@ -8,5 +8,5 @@
   "iot_class": "calculated",
   "issue_tracker": "https://github.com/Lemcke-solutions/chinese-birthdays/issues",
   "requirements": ["lunardate==0.2.2"],
-  "version": "0.1.4"
+  "version": "0.1.5"
 }

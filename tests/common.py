@@ -23,6 +23,7 @@ async def add_person(hass: HomeAssistant, **kwargs) -> MockConfigEntry:
         title=data["name"],
         data=data,
         unique_id=f"{data['name'].lower()}_{data['birth_date']}",
+        minor_version=2,
     )
     entry.add_to_hass(hass)
     assert await hass.config_entries.async_setup(entry.entry_id)

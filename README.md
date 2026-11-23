@@ -6,8 +6,9 @@ A Home Assistant custom integration for Chinese lunar birthdays. A lunar birthda
 
 - One entry per person, added via the UI.
 - The lunar date of birth is calculated from the Gregorian date of birth; you confirm it or correct it (including the lunar year).
-- Per person a device with four sensors: next lunar birthday, days until it, age at that birthday, and the Chinese zodiac animal.
-- One shared calendar **Lunar birthdays** (`calendar.maanverjaardagen` in Dutch, `calendar.lunar_birthdays` in English) with all persons as all-day events.
+- Per person a device (**Maanverjaardag Anna** / **Lunar birthday Anna**) with four sensors: next lunar birthday, days until it, age at that birthday, and the Chinese zodiac animal.
+- One shared calendar **Maanverjaardagen** / **Lunar birthdays** (`calendar.lunar_birthdays`) with all persons as all-day events.
+- All entity IDs start with `lunar_birthdays_`, regardless of the Home Assistant language, so they are easy to recognise.
 - Recalculates daily just after midnight; no polling.
 - English and Dutch translations.
 
@@ -37,14 +38,14 @@ Supported range: dates of birth from 31 January 1900 up to 2099 (the range of th
 
 ## Entities
 
-Entity IDs below are for an English Home Assistant and a person named Anna.
+Entity IDs below are for a person named Anna. They are the same in every language; the friendly names are translated (e.g. *Maanverjaardag Anna Leeftijd*).
 
 | Entity | State |
 |---|---|
-| `sensor.anna_next_lunar_birthday` | Gregorian date of the next lunar birthday (device class `date`) |
-| `sensor.anna_days_until_lunar_birthday` | Days until that date (`0` on the birthday itself) |
-| `sensor.anna_age_at_next_lunar_birthday` | Age that will be celebrated on the next lunar birthday |
-| `sensor.anna_chinese_zodiac` | Zodiac animal: `rat`, `ox`, `tiger`, `rabbit`, `dragon`, `snake`, `horse`, `goat`, `monkey`, `rooster`, `dog`, `pig` (translated in the UI) |
+| `sensor.lunar_birthdays_anna_next_birthday` | Gregorian date of the next lunar birthday (device class `date`) |
+| `sensor.lunar_birthdays_anna_days_until` | Days until that date (`0` on the birthday itself) |
+| `sensor.lunar_birthdays_anna_next_age` | Age that will be celebrated on the next lunar birthday |
+| `sensor.lunar_birthdays_anna_zodiac` | Zodiac animal: `rat`, `ox`, `tiger`, `rabbit`, `dragon`, `snake`, `horse`, `goat`, `monkey`, `rooster`, `dog`, `pig` (translated in the UI) |
 | `calendar.lunar_birthdays` | All birthdays as all-day events, summary `Anna (42)` |
 
 ### Attributes
@@ -86,7 +87,7 @@ automation:
     triggers:
       - trigger: calendar
         event: start
-        entity_id: calendar.maanverjaardagen
+        entity_id: calendar.lunar_birthdays
         offset: "09:00:00"
     actions:
       - action: notify.notify
@@ -98,7 +99,7 @@ automation:
     triggers:
       - trigger: calendar
         event: start
-        entity_id: calendar.maanverjaardagen
+        entity_id: calendar.lunar_birthdays
         offset: "-159:00:00"
     actions:
       - action: notify.notify
@@ -107,7 +108,9 @@ automation:
           message: "{{ trigger.calendar_event.summary }} has their lunar birthday on {{ as_datetime(trigger.calendar_event.start).strftime('%d-%m-%Y') }}."
 ```
 
-Replace `calendar.maanverjaardagen` with `calendar.lunar_birthdays` if your Home Assistant is in English.
+### Upgrading from 0.1.4 or earlier
+
+Version 0.1.5 renames existing entity IDs once to the `lunar_birthdays_` scheme (e.g. `sensor.anna_volgende_maanverjaardag` → `sensor.lunar_birthdays_anna_next_birthday`, `calendar.maanverjaardagen` → `calendar.lunar_birthdays`). History is kept. Entity IDs you renamed yourself are left alone. Update automations and dashboards that use the old IDs.
 
 ## Development
 

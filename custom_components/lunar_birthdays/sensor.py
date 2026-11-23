@@ -13,7 +13,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.event import async_track_time_change
 from homeassistant.util import dt as dt_util
 
-from . import PersonData
+from . import PersonData, sensor_entity_id
 from .const import DOMAIN, MANUFACTURER
 from .lunar_calc import (
     ZODIAC_ANIMALS,
@@ -38,7 +38,8 @@ async def async_setup_entry(
     person: PersonData = entry.runtime_data
     device_info = DeviceInfo(
         identifiers={(DOMAIN, entry.entry_id)},
-        name=person.name,
+        translation_key="person",
+        translation_placeholders={"name": person.name},
         manufacturer=MANUFACTURER,
         model="Lunar Birthday",
         entry_type=DeviceEntryType.SERVICE,
@@ -67,6 +68,8 @@ class LunarBirthdaySensorBase(SensorEntity):
     def __init__(self, entry: ConfigEntry, person: PersonData, device_info: DeviceInfo) -> None:
         self._person = person
         self._attr_unique_id = f"{entry.entry_id}_{self.translation_key}"
+        # Fixed, language-independent entity id so it is recognisable as ours.
+        self.entity_id = sensor_entity_id(person.name, self.translation_key)
         self._attr_device_info = device_info
         self._range_warned = False
 

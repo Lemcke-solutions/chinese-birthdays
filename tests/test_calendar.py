@@ -66,10 +66,13 @@ async def test_range_edges(hass: HomeAssistant, freezer: FrozenDateTimeFactory) 
     assert [e["summary"] for e in events] == ["Anna (42)"]
 
 
-async def test_dutch_entity_ids(hass: HomeAssistant) -> None:
+async def test_dutch_names_fixed_entity_ids(hass: HomeAssistant) -> None:
     hass.config.language = "nl"
     await add_person(hass)
-    assert hass.states.get("calendar.maanverjaardagen") is not None
-    assert hass.states.get("sensor.anna_volgende_maanverjaardag") is not None
-    assert hass.states.get("sensor.anna_chinees_sterrenbeeld").state == "rat"
-    assert hass.states.get("sensor.anna_leeftijd_bij_volgende_maanverjaardag") is not None
+    # Entity ids are language independent, friendly names are translated.
+    assert hass.states.get(ENTITY_ID).attributes["friendly_name"] == "Maanverjaardagen"
+    zodiac = hass.states.get("sensor.lunar_birthdays_anna_zodiac")
+    assert zodiac.state == "rat"
+    assert zodiac.attributes["friendly_name"] == "Maanverjaardag Anna Sterrenbeeld"
+    age = hass.states.get("sensor.lunar_birthdays_anna_next_age")
+    assert age.attributes["friendly_name"] == "Maanverjaardag Anna Leeftijd"
